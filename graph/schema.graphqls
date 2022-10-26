@@ -1,0 +1,93 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type User {
+  _id: String!
+  username: String!
+  email:String!
+  password:String!
+  age:Int!
+  created_at: Int
+  updated_at: Int
+  photos: [Photo!]
+}
+input NewUser {
+  username: String!
+  email:String!
+  password:String!
+  age:Int!
+}
+input UpdateUser {
+  _id: String
+  username: String
+  email:String
+  password:String
+  age:Int
+}
+input LoginUser {
+  email:String!
+  password:String!
+}
+type Photo {
+ _id:String!
+  title:String!
+  caption:String!
+  photo_url:String!
+  user_id:User!
+  comments:[Comment!]
+  created_at: Int
+  updated_at: Int
+}
+input NewPhoto{
+  title:String!
+  caption:String!
+  photo_url:String!
+}
+input UpdatePhoto {
+  id:ID
+  title:String!
+  caption:String!
+  photo_url:String!
+}
+input DeletePhoto {
+  id:ID!
+}
+type Comment {
+  _id:String!
+  user_id:User!
+  photo_id:Photo!
+  message:String!
+  created_at:Int
+  updated_at:Int
+}
+input NewComment{
+  message:String!
+}
+input UpdateComment{
+  _id:String!
+  message:String!
+}
+input DeleteComment{
+  _id:String!
+  message:String!
+}
+
+type Query {
+  users:[User!]!
+  photo:[Photo!]!
+  comment:[Comment!]!
+}
+
+type Mutation {
+  register(input: NewUser!):String!
+  login(input:LoginUser!):String!
+  createuser(input: NewUser!):User!
+  updateuser(input: UpdateUser!):User!
+  createphoto(input:NewPhoto):Photo!
+  updatephoto(input:UpdatePhoto):Photo!
+  deletephoto(input:DeletePhoto):Photo!
+  cratecomment(input:NewComment):Comment!
+  updatecomment(input:UpdateComment):Comment!
+  deletecomment(input:DeleteComment):Comment!
+}
